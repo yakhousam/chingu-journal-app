@@ -2,6 +2,7 @@ require("dotenv").config();
 require("./db");
 
 const express = require("express");
+const path = require('path')
 
 const route = require("./routes");
 const passport = require("passport");
@@ -57,12 +58,12 @@ app.use(cors());
   app.use(route);
 
   app.get('/auth', isLogedIn, (req, res) =>{
-    res.sendFile(__dirname + '/build_auth/index.html')
+    res.sendFile(__dirname + '/auth/build/index.js')
   })
   
   app.get("/",restricAccess,  (req, res) => {
     // res.send('welcom')
-    res.sendFile(__dirname + '/build_client/index.html')
+    res.sendFile(__dirname + '/client/build/index.html')
   });
 	
 	app.get("/logout", restricAccess, (req, res) => {
