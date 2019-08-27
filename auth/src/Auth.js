@@ -14,6 +14,9 @@ function Auth() {
     if (name === "username") setUsername(value);
     if (name === "password") setPassword(value);
   };
+  const doLoginGithub = async () => {    
+    window.location.replace("/auth/github");
+  };
   const doLogin = async e => {
     e.preventDefault();
     console.log(username, password);
@@ -66,10 +69,15 @@ function Auth() {
   return (
     <div className="container">
       <div className="social-login">
-        <button>{isFormLogin ? "Login" : "Register"} with google</button>
-        <button>{isFormLogin ? "Login" : "Register"} with github</button>
+      <h1>Social Authentication</h1>
+        <div className='btn-wraper'>
+        {/* <button>{isFormLogin ? "Login" : "Register"} with google</button> */}
+        <button onClick={doLoginGithub}>{isFormLogin ? "Login" : "Register"} with github</button>
+        </div>
+        <div></div>
       </div>
       <div className="local-login">
+      <h1>Local Authentication</h1>
         <form onSubmit={isFormLogin ? doLogin : doRegister}>
           {error && <div>{error}</div>}
           <input

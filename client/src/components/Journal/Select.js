@@ -10,7 +10,7 @@ const Select = props => {
     <select onChange={handleChange}>
       <option value='month' defaultValue>This month</option>
       <option value='day'>Today</option>
-      <option value=''>All</option>
+      <option value='all'>All</option>
     </select>
   );
 };

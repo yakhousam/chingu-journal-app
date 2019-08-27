@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import fetch from "isomorphic-unfetch";
-import  React from 'react'
+import Select from './Select'
 
 
 export default function SearchBare(props) {
@@ -9,7 +9,6 @@ export default function SearchBare(props) {
   useEffect(() => {
     // console.log('search bare use effect')
     const getTitles = async() => {
-      if(!props.userId) return 
       const res = await fetch(`api/getNotesTitles`);
       const json = await res.json();
       const titles = json.map(title => title.title)
@@ -32,6 +31,7 @@ export default function SearchBare(props) {
   }
   return (
     <div className="search">
+      <Select setNoteListQuery={props.setNoteListQuery}/>
       <form onSubmit={doSearch}>
         <input list="list-titles" placeholder="Search Entries" value={search} onChange={handleChange}/>
         <datalist id="list-titles">

@@ -1,5 +1,5 @@
 // import fetch from 'isomorphic-unfetch'
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import NotesList from "./NotesList";
 import SearchBare from "./SearchBare";
 import NoteDisplay from "./NoteDisplay";
@@ -45,6 +45,7 @@ export default function Journal() {
 
     const refrech = ()=>{
       setUpdateNotes(!updateNotes)
+      setNoteListQuery('')
     }
 
     const newNote = () => {
@@ -80,10 +81,10 @@ export default function Journal() {
     return (
       
       <div>
-        <NavBare username={username} setNoteListQuery={setNoteListQueryfn} />
+        <NavBare username={username}  />
         <div className="container">
-          <ToolBar newNote={newNote}  showNewNote={showNewNote} />
-          <div className='note-list'>
+          <ToolBar newNote={newNote}  showNewNote={showNewNote} setNoteListQuery={setNoteListQueryfn}/>
+          <div className='note-container'>
             <SearchBare  updateNotes={updateNotes}  setNoteListQuery={setNoteListQueryfn} />
             <NotesList  onClick={displayNote} updateNotes={updateNotes}  query={noteListQuery}/>
           </div>

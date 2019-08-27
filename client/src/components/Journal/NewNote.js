@@ -10,6 +10,7 @@ const NewNote = props => {
   });
 
   const addNote = async () => {
+    if(!formData.title || !formData.text) return
     const res = await fetch(
       `api/addNote`,
       {
@@ -28,6 +29,7 @@ const NewNote = props => {
   };
 
   const updateNote = async () => {
+    if(!formData.title || !formData.text) return
     const res = await fetch(`api/updateNote`, {
       method: "POST",
       headers: {
@@ -55,22 +57,23 @@ const NewNote = props => {
     <div className="new-note">
       <form>
         <button className="btn-close" onClick={() => props.closeNewNote()}>
-          close
+
         </button>
-        <h1>new note</h1>
+        <h1>{props.noteId ? 'Update note' : 'New note' }</h1>
         <input
           name="title"
           type="text"
           placeholder="title"
+          required
           value={formData.title}
           onChange={handelChange}
         />
-        <textarea name="text" value={formData.text} onChange={handelChange} />
+        <textarea name="text" required value={formData.text} onChange={handelChange} />
         {!props.noteId && (
-          <input type="button" value="add note" onClick={addNote} />
+          <input className='btn' type="button" value="add note" onClick={addNote} />
         )}
         {props.noteId && (
-          <input type="button" value="Update note" onClick={updateNote} />
+          <input className='btn' type="button" value="Update note" onClick={updateNote} />
         )}
       </form>
 
